@@ -106,12 +106,6 @@
 
 <body>
 
-    <!-- Custom Cursor -->
-    <div id="cursor" class="custom-cursor">
-        <div class="cursor-dot"></div>
-        <div class="cursor-ring"></div>
-    </div>
-
     <!-- Page Loader -->
     <div id="loader" class="page-loader">
         <canvas id="loader-canvas"></canvas>
@@ -135,17 +129,16 @@
 
     <!-- ============ NAVIGATION ============ -->
     <nav class="navbar" id="navbar">
-        <a href="#hero" class="nav-logo magnetic-btn">
+        <a href="#hero" class="nav-logo">
             <img src="images/logos/logo.png" alt="JAVEROO - Agence digitale spécialisée à Ouagadougou, Burkina Faso" class="nav-logo-img">
         </a>
         <div class="nav-links">
             <a href="#hero" class="nav-link active" data-section="hero">Accueil</a>
             <a href="#services" class="nav-link" data-section="services">Services</a>
-            <a href="#equipe" class="nav-link" data-section="equipe">Équipe</a>
             <a href="#contact" class="nav-link" data-section="contact">Contact</a>
         </div>
         <div class="nav-cta">
-            <a href="#contact" class="btn btn-nav magnetic-btn">Nous contacter<span class="btn-glow"></span></a>
+            <a href="#contact" class="btn btn-nav">Nous contacter<span class="btn-glow"></span></a>
         </div>
         <div class="nav-burger" id="nav-burger">
             <span></span><span></span><span></span>
@@ -157,7 +150,6 @@
         <div class="mobile-menu-links">
             <a href="#hero" class="mobile-link">Accueil</a>
             <a href="#services" class="mobile-link">Services</a>
-            <a href="#equipe" class="mobile-link">Équipe</a>
             <a href="#contact" class="mobile-link">Contact</a>
         </div>
     </div>
@@ -180,8 +172,8 @@
             <p class="hero-subtitle" id="hero-subtitle">Votre partenaire digital au Burkina Faso</p>
             <p class="hero-tagline" id="hero-tagline">TOUJOURS EN ÉVOLUTION</p>
             <div id="hero-cta" class="hero-buttons">
-                <a href="#services" class="btn btn-hero magnetic-btn">Découvrir nos services<span class="btn-glow"></span></a>
-                <a href="#contact" class="btn btn-secondary magnetic-btn">Nous contacter<span class="btn-glow"></span></a>
+                <a href="#services" class="btn btn-hero">Découvrir nos services<span class="btn-glow"></span></a>
+                <a href="#contact" class="btn btn-secondary">Nous contacter<span class="btn-glow"></span></a>
             </div>
         </div>
         <div class="scroll-indicator" id="scroll-indicator">
@@ -333,54 +325,6 @@
             </div>
         </div>
     </section>
-
-    <!-- ============ EQUIPE SECTION ============ -->
-    <section id="equipe" class="section equipe-section">
-        <div class="section-header">
-            <span class="section-label">02 — NOTRE ÉQUIPE</span>
-            <h2 class="section-title">Les <span class="text-gradient">architectes</span> du digital</h2>
-        </div>
-        <div class="equipe-scene-wrapper">
-            <canvas id="equipe-canvas"></canvas>
-            <div id="equipe-orbit">
-                <div class="equipe-center-logo">
-                    <img src="images/logos/logo.png" alt="JAVEROO - Startup digitale Burkina Faso" class="equipe-logo-img">
-                </div>
-                <div class="equipe-member" data-name="KABORE A. Serge" data-role="DIRECTEUR GÉNÉRAL" data-photo="images/equipe/serge.jpeg">
-                    <div class="member-sphere"><img src="images/equipe/serge.jpeg" alt="KABORE A. Serge - Directeur Général JAVEROO" class="member-photo"></div>
-                    <span class="member-label">KABORE A.S.</span>
-                </div>
-                <div class="equipe-member" data-name="DABRE P.C. Salvador" data-role="SECRÉTAIRE GÉNÉRAL" data-photo="images/equipe/Charliesalvador.jpeg">
-                    <div class="member-sphere"><img src="images/equipe/Charliesalvador.jpeg" alt="DABRE P.C. Salvador - Secrétaire Général JAVEROO" class="member-photo"></div>
-                    <span class="member-label">DABRE S.</span>
-                </div>
-                <div class="equipe-member" data-name="NIKIEMA Elvis Jethro" data-role="GRAPHISTE / DESIGNER" data-photo="images/equipe/elvisjetro.jpeg">
-                    <div class="member-sphere"><img src="images/equipe/elvisjetro.jpeg" alt="NIKIEMA Elvis Jethro - Graphiste et Designer JAVEROO" class="member-photo"></div>
-                    <span class="member-label">NIKIEMA E.J.</span>
-                </div>
-                <div class="equipe-member" data-name="KONKOBO Franck Auguste" data-role="DÉV. FRONTEND + LOGISTIQUE" data-photo="images/equipe/Auguste.jpeg">
-                    <div class="member-sphere"><img src="images/equipe/Auguste.jpeg" alt="KONKOBO Franck Auguste - Développeur Frontend JAVEROO" class="member-photo"></div>
-                    <span class="member-label">KONKOBO F.A.</span>
-                </div>
-                <div class="equipe-member" data-name="OUEDRAOGO Bonaventure Cheick Hamed" data-role="DÉVELOPPEUR BACKEND" data-photo="images/equipe/Bonaventure.jpeg">
-                    <div class="member-sphere"><img src="images/equipe/Bonaventure.jpeg" alt="OUEDRAOGO Bonaventure Cheick - Développeur Backend JAVEROO" class="member-photo"></div>
-                    <span class="member-label">OUEDRAOGO C.B.</span>
-                </div>
-                <div class="equipe-member" data-name="YARGA Kim Josaphat" data-role="DÉVELOPPEUR BACKEND" data-photo="images/equipe/KimJosaphat.jpeg">
-                    <div class="member-sphere"><img src="images/equipe/KimJosaphat.jpeg" alt="YARGA Kim Josaphat - Développeur Backend JAVEROO" class="member-photo"></div>
-                    <span class="member-label">YARGA K.J.</span>
-                </div>
-            </div>
-            <div class="equipe-detail" id="equipe-detail">
-                <div class="detail-photo-wrapper">
-                    <img src="" alt="" class="detail-photo" id="detail-photo">
-                </div>
-                <h3 class="detail-name" id="detail-name"></h3>
-                <p class="detail-role" id="detail-role"></p>
-            </div>
-        </div>
-    </section>
-
     <!-- ============ CTA SECTION ============ -->
     <section id="contact" class="section cta-section">
         <canvas id="cta-canvas"></canvas>
@@ -395,11 +339,11 @@
             </div>
             <p class="cta-subtitle">Contactez-nous dès aujourd'hui</p>
             <div class="cta-buttons">
-                <a href="https://wa.me/22666075559" target="_blank" rel="noopener" class="btn btn-hero magnetic-btn">
+                <a href="https://wa.me/22666075559" target="_blank" rel="noopener" class="btn btn-hero">
                     WhatsApp : +226 66 07 55 59
                     <span class="btn-glow"></span>
                 </a>
-                <a href="mailto:agencejaveroo@gmail.com" class="btn btn-secondary magnetic-btn">
+                <a href="mailto:agencejaveroo@gmail.com" class="btn btn-secondary">
                     agencejaveroo@gmail.com
                     <span class="btn-glow"></span>
                 </a>

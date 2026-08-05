@@ -44,41 +44,6 @@ function initLoader() {
       .to(loader, { opacity:0, duration:0.6, ease:'power2.inOut', onComplete: () => { loader.style.display='none'; cancelAnimationFrame(loaderAnimFrame); initHeroAnimations(); } });
 }
 
-// ============ CUSTOM CURSOR ============
-function initCursor() {
-    if (isMobile) return;
-    const cursor = document.getElementById('cursor');
-    const dot = cursor.querySelector('.cursor-dot');
-    const ring = cursor.querySelector('.cursor-ring');
-    let cursorX=0, cursorY=0, dotX=0, dotY=0, ringX=0, ringY=0;
-
-    document.addEventListener('mousemove', (e) => { cursorX=e.clientX; cursorY=e.clientY; mouseX=e.clientX; mouseY=e.clientY; });
-
-    function updateCursor() {
-        dotX += (cursorX-dotX)*0.2; dotY += (cursorY-dotY)*0.2;
-        ringX += (cursorX-ringX)*0.08; ringY += (cursorY-ringY)*0.08;
-        dot.style.left = dotX+'px'; dot.style.top = dotY+'px';
-        ring.style.left = ringX+'px'; ring.style.top = ringY+'px';
-        requestAnimationFrame(updateCursor);
-    }
-    updateCursor();
-
-    document.querySelectorAll('a, button, .equipe-member, .magnetic-btn').forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
-    });
-
-    document.querySelectorAll('.magnetic-btn').forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width/2;
-            const y = e.clientY - rect.top - rect.height/2;
-            btn.style.transform = `translate(${x*0.15}px, ${y*0.15}px)`;
-        });
-        btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
-    });
-}
-
 // ============ STARFIELD ============
 function initStarfield() {
     const canvas = document.getElementById('starfield');
@@ -369,7 +334,7 @@ function initNavigation() {
 
     window.addEventListener('scroll', () => {
         navbar.classList.toggle('scrolled', window.scrollY > 50);
-        const sections = ['hero','services','equipe','contact'];
+        const sections = ['hero','services','contact'];
         let current = 'hero';
         sections.forEach(id => { const s=document.getElementById(id); if(s && window.scrollY >= s.offsetTop-200) current=id; });
         navLinks.forEach(link => link.classList.toggle('active', link.dataset.section===current));
@@ -545,72 +510,6 @@ function initTrustCanvas() {
     animate();
 }
 
-// ============ EQUIPE ============
-function initEquipeSection() {
-    const members = document.querySelectorAll('.equipe-member');
-    const detail = document.getElementById('equipe-detail');
-    const detailName = document.getElementById('detail-name');
-    const detailRole = document.getElementById('detail-role');
-    const detailPhoto = document.getElementById('detail-photo');
-    const detailPhotoWrapper = document.querySelector('.detail-photo-wrapper');
-    const orbit = document.getElementById('equipe-orbit');
-    let orbitAngleOffset = 0, isAnimating = true;
-
-    function positionMembers() {
-        const currentRadius = orbit.offsetWidth/2-50;
-        members.forEach((member, i) => {
-            const angle = (i/members.length)*Math.PI*2+orbitAngleOffset;
-            member.style.left = (Math.cos(angle)*currentRadius+orbit.offsetWidth/2-32)+'px';
-            member.style.top = (Math.sin(angle)*currentRadius+orbit.offsetHeight/2-32)+'px';
-        });
-    }
-
-    function animateOrbit() { if(isAnimating) { orbitAngleOffset+=0.003; positionMembers(); } requestAnimationFrame(animateOrbit); }
-    positionMembers(); animateOrbit();
-
-    function showDetail(member) {
-        detailName.textContent = member.dataset.name;
-        detailRole.textContent = member.dataset.role;
-        const photo = member.dataset.photo;
-        if(photo) { detailPhoto.src=photo; detailPhoto.alt=member.dataset.name; detailPhotoWrapper.style.display=''; }
-        else { detailPhoto.src=''; detailPhotoWrapper.style.display='none'; }
-        detail.classList.add('visible');
-    }
-
-    members.forEach(member => {
-        member.addEventListener('click', () => {
-            const wasActive = member.classList.contains('active');
-            members.forEach(m => m.classList.remove('active'));
-            if(wasActive) { detail.classList.remove('visible'); isAnimating=true; }
-            else { member.classList.add('active'); showDetail(member); isAnimating=false; }
-        });
-        member.addEventListener('mouseenter', () => { if(!member.classList.contains('active')) showDetail(member); });
-        member.addEventListener('mouseleave', () => { if(!document.querySelector('.equipe-member.active')) detail.classList.remove('visible'); });
-    });
-
-    gsap.from('#equipe-orbit', { scrollTrigger:{ trigger:'#equipe', start:'top 60%', toggleActions:'play none none reverse' }, opacity:0, scale:0.6, rotation:-30, duration:1.2, ease:'power3.out' });
-
-    if (!isMobile) {
-        const canvas = document.getElementById('equipe-canvas');
-        const ctx = canvas.getContext('2d');
-        function resizeCanvas() { const w=document.querySelector('.equipe-scene-wrapper'); canvas.width=w.offsetWidth; canvas.height=w.offsetHeight; }
-        resizeCanvas(); window.addEventListener('resize', resizeCanvas);
-        function drawConnections() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            const cx=canvas.width/2, cy=canvas.height/2;
-            members.forEach(member => {
-                const rect=member.getBoundingClientRect(), wr=canvas.getBoundingClientRect();
-                ctx.beginPath(); ctx.moveTo(cx,cy);
-                ctx.lineTo(rect.left-wr.left+rect.width/2, rect.top-wr.top+rect.height/2);
-                ctx.strokeStyle='rgba(0,51,160,0.06)'; ctx.lineWidth=1; ctx.stroke();
-            });
-            requestAnimationFrame(drawConnections);
-        }
-        drawConnections();
-    }
-    window.addEventListener('resize', positionMembers);
-}
-
 // ============ CTA ============
 function initCTASection() {
     if(!isMobile) initCTACanvas();
@@ -692,7 +591,6 @@ function initSmoothLinks() {
 document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
     initLoader();
-    initCursor();
     initStarfield();
     initHeroScene();
     initNavigation();
@@ -702,7 +600,6 @@ document.addEventListener('DOMContentLoaded', () => {
         initSectionAnimations();
         initServicesSection();
         initTrustSection();
-        initEquipeSection();
         initCTASection();
         initSmoothLinks();
         ScrollTrigger.refresh();
